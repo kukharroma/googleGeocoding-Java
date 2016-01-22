@@ -5,5 +5,5 @@ package com.winguys.geocoding.api;
  */
 public class Url {
     public static final String BASE_URL = "https://maps.google.com/maps/api/geocode/";
-    public static final String JSON_PARAM = "json?";
+    public static final String JSON_TYPE = "json?";
 }

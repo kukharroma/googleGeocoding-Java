@@ -14,7 +14,7 @@ import retrofit.http.QueryMap;
  */
 public interface GeocodeService {
 
-    @GET(Url.JSON_PARAM)
+    @GET(Url.JSON_TYPE)
     Call<GeocodeResult> getDataFromGeocodeService(@QueryMap Map<String, String> options);
 
 }

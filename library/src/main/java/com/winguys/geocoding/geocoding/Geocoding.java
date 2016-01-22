@@ -5,7 +5,7 @@ package com.winguys.geocoding.geocoding;
  */
 public class Geocoding {
 
-    private String adderess;
+    private String address;
     private String components;
     private String apiKey;
     private String bounds;
@@ -28,7 +28,7 @@ public class Geocoding {
         }
 
         public Builder setAddress(String address) {
-            Geocoding.this.adderess = address;
+            Geocoding.this.address = address;
             return this;
         }
 
@@ -53,6 +53,12 @@ public class Geocoding {
         }
 
         public Geocoding build() {
+            if(Geocoding.this.apiKey.isEmpty())
+                throw new IllegalArgumentException("Please set api key for geocoding");
+            if(Geocoding.this.address.isEmpty())
+                throw new IllegalArgumentException("Please set address for geocoding");
+            if(Geocoding.this.components.isEmpty())
+                throw new IllegalArgumentException("Please set components for geocoding");
             return Geocoding.this;
         }
     }
