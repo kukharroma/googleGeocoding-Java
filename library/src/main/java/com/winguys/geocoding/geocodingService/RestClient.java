@@ -4,6 +4,7 @@ import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.winguys.geocoding.constant.GeocodingUrl;
 
 import java.io.IOException;
 
@@ -15,7 +16,6 @@ import retrofit.Retrofit;
  */
 public class RestClient {
 
-    private static final String BASE_URL = "https://maps.google.com/maps/api/geocode/";
     private static RestClient instance = null;
     private GeocodeService service;
     private OkHttpClient client;
@@ -27,7 +27,7 @@ public class RestClient {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request().newBuilder()
-                        .addHeader("key",apiKey)
+                        .addHeader("key", apiKey)
                         .build();
                 return chain.proceed(request);
             }
@@ -35,7 +35,7 @@ public class RestClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-                .baseUrl(BASE_URL)
+                .baseUrl(GeocodingUrl.GEOCODING_API_URL)
                 .build();
         service = retrofit.create(GeocodeService.class);
     }
@@ -44,10 +44,11 @@ public class RestClient {
         return service;
     }
 
-    public static RestClient getInstance() {
+    public static RestClient getInstance(String apiServiceKey) {
         if (instance == null) {
             instance = new RestClient();
         }
+        instance.apiKey = apiServiceKey;
         return instance;
     }
 }
