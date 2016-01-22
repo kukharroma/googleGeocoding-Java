@@ -1,7 +1,6 @@
 package com.winguys.geocoding.api;
 
 
-import com.winguys.geocoding.constant.GeocodingUrl;
 import com.winguys.geocoding.model.GeocodeResult;
 
 import java.util.Map;
@@ -15,7 +14,7 @@ import retrofit.http.QueryMap;
  */
 public interface GeocodeService {
 
-    @GET(GeocodingUrl.JSON_PARAM)
+    @GET(Url.JSON_PARAM)
     Call<GeocodeResult> getDataFromGeocodeService(@QueryMap Map<String, String> options);
 
 }
