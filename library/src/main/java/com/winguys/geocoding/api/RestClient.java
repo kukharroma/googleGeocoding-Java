@@ -4,6 +4,7 @@ import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.winguys.geocoding.constant.GeocodingUrl;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class RestClient {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request().newBuilder()
-                        .addHeader("key",apiKey)
+                        .addHeader("key", apiKey)
                         .build();
                 return chain.proceed(request);
             }
@@ -43,10 +44,11 @@ public class RestClient {
         return service;
     }
 
-    public static RestClient getInstance() {
+    public static RestClient getInstance(String apiServiceKey) {
         if (instance == null) {
             instance = new RestClient();
         }
+        instance.apiKey = apiServiceKey;
         return instance;
     }
 }
