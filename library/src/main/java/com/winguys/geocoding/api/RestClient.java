@@ -1,4 +1,4 @@
-package com.winguys.geocoding.api;
+package com.winguys.geocoding.geocodingService;
 
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
@@ -18,24 +18,11 @@ public class RestClient {
 
     private static RestClient instance = null;
     private GeocodeService service;
-    private OkHttpClient client;
-    private String apiKey = "Service key"; //in future must be added by user
 
     private RestClient() {
-        client = new OkHttpClient();
-        client.interceptors().add(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request().newBuilder()
-                        .addHeader("key", apiKey)
-                        .build();
-                return chain.proceed(request);
-            }
-        });
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .baseUrl(Url.BASE_URL)
+                .baseUrl(GeocodingUrl.GEOCODING_API_URL)
                 .build();
         service = retrofit.create(GeocodeService.class);
     }
@@ -48,7 +35,6 @@ public class RestClient {
         if (instance == null) {
             instance = new RestClient();
         }
-        instance.apiKey = apiServiceKey;
         return instance;
     }
 }
