@@ -1,7 +1,5 @@
 package com.winguys.geocoding.api;
 
-import com.winguys.geocoding.constant.GeocodingUrl;
-
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -16,7 +14,7 @@ public class RestClient {
     private RestClient() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(GeocodingUrl.GEOCODING_API_URL)
+                .baseUrl(Url.BASE_URL)
                 .build();
         service = retrofit.create(GeocodeService.class);
     }
