@@ -1,4 +1,4 @@
-package com.winguys.geocoding.geocodingService;
+package com.winguys.geocoding.api;
 
 
 import com.winguys.geocoding.model.GeocodeResult;

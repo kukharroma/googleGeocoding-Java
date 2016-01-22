@@ -1,4 +1,4 @@
-package com.winguys.geocoding.geocodingService;
+package com.winguys.geocoding.api;
 
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
@@ -15,7 +15,6 @@ import retrofit.Retrofit;
  */
 public class RestClient {
 
-    private static final String BASE_URL = "https://maps.google.com/maps/api/geocode/";
     private static RestClient instance = null;
     private GeocodeService service;
     private OkHttpClient client;
@@ -35,7 +34,7 @@ public class RestClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-                .baseUrl(BASE_URL)
+                .baseUrl(Url.BASE_URL)
                 .build();
         service = retrofit.create(GeocodeService.class);
     }
