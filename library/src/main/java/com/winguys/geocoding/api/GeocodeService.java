@@ -15,6 +15,9 @@ import retrofit.http.QueryMap;
 public interface GeocodeService {
 
     @GET(Url.JSON_TYPE)
-    Call<GeocodeResult> getDataFromGeocodeService(@QueryMap Map<String, String> options);
+    Call<GeocodeResult> makeGeocoding(@QueryMap Map<String, String> options);
+
+    @GET(Url.JSON_TYPE)
+    Call<GeocodeResult> makeReverseGeocoding(@QueryMap Map<String, String> options);
 
 }

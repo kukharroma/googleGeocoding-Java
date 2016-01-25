@@ -1,6 +1,6 @@
 package com.winguys.geocoding.geocoding;
 
-import com.winguys.geocoding.constant.RequestParams;
+import com.winguys.geocoding.api.Url;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,15 +16,6 @@ public class Geocoding {
     private String[] bounds;
     private String language;
     private String region;
-
-    /**
-     * fields for components parameter
-     */
-    private String route;
-    private String locaity;
-    private String administrativeArea;
-    private String postalCode;
-    private String country;
 
     public String getAddress() {
         return address;
@@ -69,11 +60,11 @@ public class Geocoding {
 
         public Builder setComponents(String route, String locality, String administrativeArea, String postalCode, String country) {
             Geocoding.this.componentsMap = new HashMap<>();
-            Geocoding.this.componentsMap.put(RequestParams.ROUTE, route);
-            Geocoding.this.componentsMap.put(RequestParams.LOCALITY, locality);
-            Geocoding.this.componentsMap.put(RequestParams.ADMINISTRATIVE_AREA, administrativeArea);
-            Geocoding.this.componentsMap.put(RequestParams.POSTAL_CODE, postalCode);
-            Geocoding.this.componentsMap.put(RequestParams.COUNTRY, country);
+            Geocoding.this.componentsMap.put(Url.Components.ROUTE, route);
+            Geocoding.this.componentsMap.put(Url.Components.LOCALITY, locality);
+            Geocoding.this.componentsMap.put(Url.Components.ADMINISTRATIVE_AREA, administrativeArea);
+            Geocoding.this.componentsMap.put(Url.Components.POSTAL_CODE, postalCode);
+            Geocoding.this.componentsMap.put(Url.Components.COUNTRY, country);
             return this;
         }
 

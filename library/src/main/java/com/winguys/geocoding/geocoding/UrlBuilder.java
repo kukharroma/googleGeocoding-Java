@@ -1,6 +1,6 @@
 package com.winguys.geocoding.geocoding;
 
-import com.winguys.geocoding.constant.RequestParams;
+import com.winguys.geocoding.api.Url;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,7 +21,7 @@ public class UrlBuilder {
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
         if (geocoding.getAddress() != null) {
-            map.put(RequestParams.ADDRESS, geocoding.getAddress());
+            map.put(Url.Geocoding.ADDRESS, geocoding.getAddress());
         }
 
         if (geocoding.getComponents() != null) {
@@ -34,7 +34,7 @@ public class UrlBuilder {
                 it.remove();
             }
             value = value.deleteCharAt(value.length() - 1);
-            map.put(RequestParams.COMPONENTS, value.toString());
+            map.put(Url.Geocoding.COMPONENTS, value.toString());
         }
 
         if (geocoding.getBounds() != null) {
@@ -45,18 +45,18 @@ public class UrlBuilder {
                     value.append("|");
                 }
             }
-            map.put(RequestParams.BOUNDS, value.toString());
+            map.put(Url.Geocoding.BOUNDS, value.toString());
         }
 
         if (geocoding.getLanguage() != null) {
-            map.put(RequestParams.LANGUAGE, geocoding.getLanguage());
+            map.put(Url.Geocoding.LANGUAGE, geocoding.getLanguage());
         }
 
         if (geocoding.getRegion() != null) {
-            map.put(RequestParams.REGION, geocoding.getRegion());
+            map.put(Url.Geocoding.REGION, geocoding.getRegion());
         }
 
-        map.put(RequestParams.KEY, geocoding.getApiKey());
+        map.put(Url.Geocoding.KEY, geocoding.getApiKey());
 
         return map;
     }
