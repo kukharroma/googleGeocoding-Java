@@ -3,7 +3,7 @@ package com.winguys.geocoding.constant;
 /**
  * Created by Stafiiyevskyi on 22.01.2016.
  */
-public interface RequestResult {
+public interface RequestMessage {
 
     String OK = "OK";
     String ZERO_RESULTS = "ZERO_RESULTS";
