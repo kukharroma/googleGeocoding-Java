@@ -1,6 +1,7 @@
 package com.winguys.geocoding.geocoding;
 
 import com.winguys.geocoding.api.RestClient;
+import com.winguys.geocoding.api.UrlBuilder;
 import com.winguys.geocoding.model.GeocodeResult;
 
 import retrofit.Callback;

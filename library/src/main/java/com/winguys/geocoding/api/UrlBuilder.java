@@ -1,6 +1,5 @@
 package com.winguys.geocoding.api;
 
-import com.winguys.geocoding.api.Url;
 import com.winguys.geocoding.geocoding.Geocoding;
 
 import java.util.HashMap;
@@ -21,8 +20,8 @@ public class UrlBuilder {
 
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
-        if (geocoding.getAddress() != null) {
-            map.put(Url.Geocoding.ADDRESS, geocoding.getAddress());
+        if (geocoding.getParameter() != null) {
+            map.put(Url.Geocoding.ADDRESS, geocoding.getParameter());
         }
 
         if (geocoding.getComponents() != null) {
