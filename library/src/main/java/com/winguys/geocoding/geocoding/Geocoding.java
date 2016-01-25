@@ -1,6 +1,6 @@
 package com.winguys.geocoding.geocoding;
 
-import com.winguys.geocoding.api.*;
+import com.winguys.geocoding.api.Url;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,12 +43,19 @@ public class Geocoding {
         return region;
     }
 
-    public void execute() {
-        com.winguys.geocoding.api.UrlBuilder urlBuilder = new com.winguys.geocoding.api.UrlBuilder(this);
-        RestClient.getInstance().getGeocodeService().makeGeocoding(urlBuilder.buildUrl());
-
+    public void setListener(OnGeocodingResultListener listener) {
+        this.listener = listener;
     }
 
+    public void execute() {
+        GeocodingUseCase geocodingUseCase = new GeocodingUseCase();
+        geocodingUseCase.execute(this, listener);
+    }
+
+    public void execute(OnGeocodingResultListener listener){
+        GeocodingUseCase geocodingUseCase = new GeocodingUseCase();
+        geocodingUseCase.execute(this, listener);
+    }
 
     public static Builder newBuilder() {
         return new Geocoding().new Builder();
@@ -96,9 +103,8 @@ public class Geocoding {
                 throw new IllegalArgumentException("Please set api key for geocoding");
             if (Geocoding.this.address.isEmpty() && Geocoding.this.componentsMap == null)
                 throw new IllegalArgumentException("Please set address or components for geocoding");
-            if (listener == null) {
+            if (listener == null)
                 throw new IllegalArgumentException("Please set OnGeocodingListener for geocoding");
-            }
             return Geocoding.this;
         }
     }
