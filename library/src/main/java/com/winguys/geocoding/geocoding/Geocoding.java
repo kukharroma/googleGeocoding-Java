@@ -8,14 +8,14 @@ public class Geocoding {
     private String address;
     private String[] components;
     private String apiKey;
-    private String bounds;
+    private String[] bounds;
     private String language;
     private String region;
 
     private OnGeocodingResultListener listner;
 
     public String getAdderess() {
-        return adderess;
+        return address;
     }
 
     public String[] getComponents() {
@@ -26,7 +26,7 @@ public class Geocoding {
         return apiKey;
     }
 
-    public String getBounds() {
+    public String[] getBounds() {
         return bounds;
     }
 
@@ -71,7 +71,7 @@ public class Geocoding {
             return this;
         }
 
-        public Builder setBounds(String bounds) {
+        public Builder setBounds(String... bounds) {
             Geocoding.this.bounds = bounds;
             return this;
         }
@@ -91,7 +91,7 @@ public class Geocoding {
                 throw new IllegalArgumentException("Please set api key for geocoding");
             if(Geocoding.this.address.isEmpty())
                 throw new IllegalArgumentException("Please set address for geocoding");
-            if(Geocoding.this.components.isEmpty())
+            if(Geocoding.this.components == null)
                 throw new IllegalArgumentException("Please set components for geocoding");
             return Geocoding.this;
         }
