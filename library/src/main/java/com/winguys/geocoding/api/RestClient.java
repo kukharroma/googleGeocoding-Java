@@ -23,7 +23,7 @@ public class RestClient {
         return service;
     }
 
-    public static RestClient getInstance(String apiServiceKey) {
+    public static RestClient getInstance() {
         if (instance == null) {
             instance = new RestClient();
         }

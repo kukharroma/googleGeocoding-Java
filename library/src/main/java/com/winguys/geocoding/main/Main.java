@@ -2,7 +2,7 @@ package com.winguys.geocoding.main;
 
 
 import com.winguys.geocoding.geocoding.Geocoding;
-import com.winguys.geocoding.geocoding.UrlBuilder;
+import com.winguys.geocoding.api.UrlBuilder;
 
 /**
  * Created by roma on 25.01.16.

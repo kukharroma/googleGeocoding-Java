@@ -1,4 +1,4 @@
-package com.winguys.geocoding.constant;
+package com.winguys.geocoding.api.constant;
 
 /**
  * Created by Stafiiyevskyi on 22.01.2016.

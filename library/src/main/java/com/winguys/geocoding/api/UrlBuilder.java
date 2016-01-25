@@ -1,6 +1,7 @@
-package com.winguys.geocoding.geocoding;
+package com.winguys.geocoding.api;
 
 import com.winguys.geocoding.api.Url;
+import com.winguys.geocoding.geocoding.Geocoding;
 
 import java.util.HashMap;
 import java.util.Iterator;
