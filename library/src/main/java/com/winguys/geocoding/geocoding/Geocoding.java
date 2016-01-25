@@ -6,13 +6,47 @@ package com.winguys.geocoding.geocoding;
 public class Geocoding {
 
     private String address;
-    private String components;
+    private String[] components;
     private String apiKey;
     private String bounds;
     private String language;
     private String region;
 
-    public static Builder newBuilder(){
+    private OnGeocodingResultListener listner;
+
+    public String getAdderess() {
+        return adderess;
+    }
+
+    public String[] getComponents() {
+        return components;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public String getBounds() {
+        return bounds;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void execute() {
+
+    }
+
+    public void execute(OnGeocodingResultListener listener) {
+
+    }
+
+    public static Builder newBuilder() {
         return new Geocoding().new Builder();
     }
 
@@ -33,7 +67,7 @@ public class Geocoding {
         }
 
         public Builder setComponents(String... components) {
-            Geocoding.this.components = components[0];
+            Geocoding.this.components = components;
             return this;
         }
 
@@ -47,7 +81,7 @@ public class Geocoding {
             return this;
         }
 
-        public Builder setRegion(String region){
+        public Builder setRegion(String region) {
             Geocoding.this.region = region;
             return this;
         }
