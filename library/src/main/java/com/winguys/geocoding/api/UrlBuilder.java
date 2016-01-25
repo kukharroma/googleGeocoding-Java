@@ -20,8 +20,8 @@ public class UrlBuilder {
 
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
-        if (geocoding.getParameter() != null) {
-            map.put(Url.Geocoding.ADDRESS, geocoding.getParameter());
+        if (geocoding.getAddress() != null) {
+            map.put(Url.Geocoding.ADDRESS, geocoding.getAddress());
         }
 
         if (geocoding.getComponents() != null) {

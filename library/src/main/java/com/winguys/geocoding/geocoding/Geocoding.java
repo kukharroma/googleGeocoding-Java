@@ -1,7 +1,6 @@
 package com.winguys.geocoding.geocoding;
 
 import com.winguys.geocoding.api.Url;
-import com.winguys.geocoding.api.constant.RequiredParameter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +10,7 @@ import java.util.Map;
  */
 public class Geocoding {
 
-    private String parameter;
+    private String address;
     private Map<String, String> componentsMap;
     private String apiKey;
     private String[] bounds;
@@ -20,8 +19,8 @@ public class Geocoding {
 
     private OnGeocodingResultListener listener;
 
-    public String getParameter() {
-        return parameter;
+    public String getAddress() {
+        return address;
     }
 
     public Map<String, String> getComponents() {
@@ -69,8 +68,8 @@ public class Geocoding {
             return this;
         }
 
-        public Builder setRequestType(RequiredParameter parameter) {
-            Geocoding.this.parameter = parameter.getParameter();
+        public Builder setAddress(String address) {
+            Geocoding.this.address = address;
             return this;
         }
 
@@ -102,8 +101,8 @@ public class Geocoding {
         public Geocoding build() {
             if (Geocoding.this.apiKey.isEmpty())
                 throw new IllegalArgumentException("Please set api key for geocoding");
-            if (Geocoding.this.parameter.isEmpty() && Geocoding.this.componentsMap == null)
-                throw new IllegalArgumentException("Please set parameter or components for geocoding");
+            if (Geocoding.this.address.isEmpty() && Geocoding.this.componentsMap == null)
+                throw new IllegalArgumentException("Please set address or components for geocoding");
             if (listener == null)
                 throw new IllegalArgumentException("Please set OnGeocodingListener for geocoding");
             return Geocoding.this;
