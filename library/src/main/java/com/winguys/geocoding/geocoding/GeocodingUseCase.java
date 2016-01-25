@@ -17,7 +17,8 @@ public class GeocodingUseCase {
         RestClient.getInstance().getGeocodeService().makeGeocoding(urlBuilder.buildUrl()).enqueue(new Callback<GeocodeResult>() {
             @Override
             public void onResponse(Response<GeocodeResult> response, Retrofit retrofit) {
-                listener.onGeocodingResultListener(response.body());
+                if (listener != null)
+                    listener.onGeocodingResultListener(response.body());
             }
 
             @Override
