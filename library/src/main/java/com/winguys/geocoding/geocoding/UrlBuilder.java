@@ -3,6 +3,7 @@ package com.winguys.geocoding.geocoding;
 import com.winguys.geocoding.constant.RequestParams;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -13,25 +14,26 @@ public class UrlBuilder {
     private Geocoding geocoding;
     private Map<String, String> map;
 
-
-    public UrlBuilder(Geocoding  geocoding) {
+    public UrlBuilder(Geocoding geocoding) {
         this.geocoding = geocoding;
     }
 
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
-        if (geocoding.getAdderess() != null) {
-            map.put(RequestParams.ADDRESS, geocoding.getAdderess());
+        if (geocoding.getAddress() != null) {
+            map.put(RequestParams.ADDRESS, geocoding.getAddress());
         }
 
         if (geocoding.getComponents() != null) {
+            Iterator it = geocoding.getComponents().entrySet().iterator();
             StringBuilder value = new StringBuilder();
-            for (int i = 0; i < geocoding.getComponents().length; i++) {
-                value.append(geocoding.getComponents()[i]);
-                if (i != geocoding.getComponents().length - 1) {
-                    value.append("|");
-                }
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                value.append(pair.getKey()).append(":").append(pair.getValue());
+                value.append("|");
+                it.remove();
             }
+            value = value.deleteCharAt(value.length() - 1);
             map.put(RequestParams.COMPONENTS, value.toString());
         }
 

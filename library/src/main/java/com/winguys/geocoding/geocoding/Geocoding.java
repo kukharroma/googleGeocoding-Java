@@ -1,25 +1,37 @@
 package com.winguys.geocoding.geocoding;
 
+import com.winguys.geocoding.constant.RequestParams;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by roma on 22.01.16.
  */
 public class Geocoding {
 
     private String address;
-    private String[] components;
+    private Map<String, String> componentsMap;
     private String apiKey;
     private String[] bounds;
     private String language;
     private String region;
 
-    private OnGeocodingResultListener listner;
+    /**
+     * fields for components parameter
+     */
+    private String route;
+    private String locaity;
+    private String administrativeArea;
+    private String postalCode;
+    private String country;
 
-    public String getAdderess() {
+    public String getAddress() {
         return address;
     }
 
-    public String[] getComponents() {
-        return components;
+    public Map<String, String> getComponents() {
+        return componentsMap;
     }
 
     public String getApiKey() {
@@ -38,23 +50,12 @@ public class Geocoding {
         return region;
     }
 
-    public void execute() {
-
-    }
-
-    public void execute(OnGeocodingResultListener listener) {
-
-    }
 
     public static Builder newBuilder() {
         return new Geocoding().new Builder();
     }
 
     public class Builder {
-
-        private Builder() {
-
-        }
 
         public Builder setApiKey(String apiKey) {
             Geocoding.this.apiKey = apiKey;
@@ -66,8 +67,13 @@ public class Geocoding {
             return this;
         }
 
-        public Builder setComponents(String... components) {
-            Geocoding.this.components = components;
+        public Builder setComponents(String route, String locality, String administrativeArea, String postalCode, String country) {
+            Geocoding.this.componentsMap = new HashMap<>();
+            Geocoding.this.componentsMap.put(RequestParams.ROUTE, route);
+            Geocoding.this.componentsMap.put(RequestParams.LOCALITY, locality);
+            Geocoding.this.componentsMap.put(RequestParams.ADMINISTRATIVE_AREA, administrativeArea);
+            Geocoding.this.componentsMap.put(RequestParams.POSTAL_CODE, postalCode);
+            Geocoding.this.componentsMap.put(RequestParams.COUNTRY, country);
             return this;
         }
 
@@ -87,12 +93,10 @@ public class Geocoding {
         }
 
         public Geocoding build() {
-            if(Geocoding.this.apiKey.isEmpty())
+            if (Geocoding.this.apiKey.isEmpty())
                 throw new IllegalArgumentException("Please set api key for geocoding");
-            if(Geocoding.this.address.isEmpty())
-                throw new IllegalArgumentException("Please set address for geocoding");
-            if(Geocoding.this.components == null)
-                throw new IllegalArgumentException("Please set components for geocoding");
+            if (Geocoding.this.address.isEmpty() && Geocoding.this.componentsMap == null)
+                throw new IllegalArgumentException("Please set address or components for geocoding");
             return Geocoding.this;
         }
     }
