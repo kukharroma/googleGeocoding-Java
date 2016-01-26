@@ -32,20 +32,25 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.tv_reverse_geocoding_result)
     TextView tvReverseGeocodingResult;
 
+    private String latitude = "40,744061";
+    private String longtitude = "-73,995561";
+    private String address = "247 W 24th St,New York, NY 10011,USA";
+    private String API_KEY = "AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        etLatitude.setText("40,744061");
-        etLongitude.setText("-73,995561");
-        etAddress.setText("247 W 24th St,New York, NY 10011,USA");
+        etLatitude.setText(latitude);
+        etLongitude.setText(longtitude);
+        etAddress.setText(address);
     }
 
     @OnClick(R.id.btn_address_geocoding)
     public void onGecodingClick() {
         if (!etAddress.getText().toString().isEmpty()) {
-            Geocoding.newBuilder().setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY")
+            Geocoding.newBuilder().setApiKey(API_KEY)
                     .setRegion(Region.UNITED_STATES)
                     .setLanguage(Language.ENGLISH)
                     .setAddress(etAddress.getText().toString())
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             String latitude = etLatitude.getText().toString().replaceAll(",", ".");
             String longitude = etLongitude.getText().toString().replaceAll(",", ".");
             Log.i("Latitude ", latitude);
-            ReverseGeocoding.newBuilder().setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY")
+            ReverseGeocoding.newBuilder().setApiKey(API_KEY)
                     .setLatLng(latitude + ", " + longitude)
                     .build()
                     .execute(new OnGeocodingResultListener() {
@@ -81,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+
+
         }
     }
 }
