@@ -23,4 +23,12 @@ public interface Url {
         String POSTAL_CODE = "postal_code";
         String COUNTRY = "country";
     }
+
+    interface ReverseGeocoding {
+        String LAT_LNG = "latlng";
+        String PLACE_ID = "place_id";
+        String LOCATION_TYPE = "location_type";
+        String RESULT_TYPE = "result_type";
+    }
+
 }

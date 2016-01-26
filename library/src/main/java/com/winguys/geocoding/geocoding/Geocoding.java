@@ -1,6 +1,8 @@
 package com.winguys.geocoding.geocoding;
 
 import com.winguys.geocoding.api.Url;
+import com.winguys.geocoding.api.constant.Language;
+import com.winguys.geocoding.api.constant.Region;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +16,8 @@ public class Geocoding {
     private Map<String, String> componentsMap;
     private String apiKey;
     private String[] bounds;
-    private String language;
-    private String region;
+    private Language language;
+    private Region region;
 
     private OnGeocodingResultListener listener;
 
@@ -35,11 +37,11 @@ public class Geocoding {
         return bounds;
     }
 
-    public String getLanguage() {
+    public Language getLanguage() {
         return language;
     }
 
-    public String getRegion() {
+    public Region getRegion() {
         return region;
     }
 
@@ -73,13 +75,13 @@ public class Geocoding {
             return this;
         }
 
-        public Builder setComponents(String route, String locality, String administrativeArea, String postalCode, String country) {
+        public Builder setComponents(String route, String locality, String administrativeArea, String postalCode, Region country) {
             Geocoding.this.componentsMap = new HashMap<>();
             Geocoding.this.componentsMap.put(Url.Components.ROUTE, route);
             Geocoding.this.componentsMap.put(Url.Components.LOCALITY, locality);
             Geocoding.this.componentsMap.put(Url.Components.ADMINISTRATIVE_AREA, administrativeArea);
             Geocoding.this.componentsMap.put(Url.Components.POSTAL_CODE, postalCode);
-            Geocoding.this.componentsMap.put(Url.Components.COUNTRY, country);
+            Geocoding.this.componentsMap.put(Url.Components.COUNTRY, country.getParam());
             return this;
         }
 
@@ -88,12 +90,12 @@ public class Geocoding {
             return this;
         }
 
-        public Builder setLanguage(String language) {
+        public Builder setLanguage(Language language) {
             Geocoding.this.language = language;
             return this;
         }
 
-        public Builder setRegion(String region) {
+        public Builder setRegion(Region region) {
             Geocoding.this.region = region;
             return this;
         }

@@ -49,11 +49,11 @@ public class UrlBuilder {
         }
 
         if (geocoding.getLanguage() != null) {
-            map.put(Url.Geocoding.LANGUAGE, geocoding.getLanguage());
+            map.put(Url.Geocoding.LANGUAGE, geocoding.getLanguage().getParam());
         }
 
         if (geocoding.getRegion() != null) {
-            map.put(Url.Geocoding.REGION, geocoding.getRegion());
+            map.put(Url.Geocoding.REGION, geocoding.getRegion().getParam());
         }
 
         map.put(Url.Geocoding.KEY, geocoding.getApiKey());
