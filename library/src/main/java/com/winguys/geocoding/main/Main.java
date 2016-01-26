@@ -32,7 +32,7 @@ public class Main {
         });
 
         ReverseGeocoding.newBuilder().setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY")
-                .setLatLng("40.714224,-73.961452")
+                .setLatLng("40.744061, -73.995561")
                 .setLanguage(Language.UKRAINIAN)
                 .setResultTypes(AddressType.COUNTRY,AddressType.NEIGHBORHOOD)
                 .build().execute(new OnGeocodingResultListener() {

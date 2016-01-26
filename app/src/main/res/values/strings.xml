@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GoogleGeocodingJava</string>
+    <string name="address_hint">enter address</string>
+    <string name="result_title">Result:</string>
+    <string name="geocoding">Geocoding</string>
+    <string name="latitude_hint">enter latitude</string>
+    <string name="longitude_hint">enter longitude</string>
+    <string name="reverse_geocoding">Reverse geocoding</string>
 </resources>
