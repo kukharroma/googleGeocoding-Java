@@ -1,13 +1,8 @@
 package com.winguys.geocoding.api;
 
-import com.winguys.geocoding.api.constant.AddressType;
-import com.winguys.geocoding.api.constant.ReverseLocationType;
 import com.winguys.geocoding.geocoding.ReverseGeocoding;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,30 +25,24 @@ public class ReverseUrlBuilder {
         }
 
         if (reverseGeocoding.getLocationTypes() != null) {
-            List<ReverseLocationType> locationTypeArrayList = Arrays.asList(reverseGeocoding.getLocationTypes());
-            Iterator it = locationTypeArrayList.iterator();
             StringBuilder value = new StringBuilder();
-            while (it.hasNext()) {
-                ReverseLocationType pair = (ReverseLocationType) it.next();
-                value.append(pair.getParam());
-                value.append("|");
-                it.remove();
+            for (int i = 0; i < reverseGeocoding.getLocationTypes().length; i++) {
+                value.append(reverseGeocoding.getLocationTypes()[i].getParam());
+                if (i != reverseGeocoding.getLocationTypes().length - 1) {
+                    value.append("|");
+                }
             }
-            value = value.deleteCharAt(value.length() - 1);
             map.put(Url.ReverseGeocoding.LOCATION_TYPE, value.toString());
         }
 
         if (reverseGeocoding.getResultTypes() != null) {
-            List<AddressType> locationTypeArrayList = Arrays.asList(reverseGeocoding.getResultTypes());
-            Iterator it = locationTypeArrayList.iterator();
             StringBuilder value = new StringBuilder();
-            while (it.hasNext()) {
-                AddressType addressType = (AddressType) it.next();
-                value.append(addressType.getParam());
-                value.append("|");
-                it.remove();
+            for (int i = 0; i < reverseGeocoding.getResultTypes().length; i++) {
+                value.append(reverseGeocoding.getResultTypes()[i].getParam());
+                if (i != reverseGeocoding.getResultTypes().length - 1) {
+                    value.append("|");
+                }
             }
-            value = value.deleteCharAt(value.length() - 1);
             map.put(Url.ReverseGeocoding.RESULT_TYPE, value.toString());
         }
 

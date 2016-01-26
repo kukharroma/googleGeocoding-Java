@@ -50,6 +50,8 @@ public class Geocoding {
     }
 
     public void execute() {
+        if (listener == null)
+            throw new IllegalArgumentException("Please set OnGeocodingListener for geocoding");
         GeocodingUseCase geocodingUseCase = new GeocodingUseCase();
         geocodingUseCase.execute(this, listener);
     }
@@ -105,8 +107,6 @@ public class Geocoding {
                 throw new IllegalArgumentException("Please set api key for geocoding");
             if (Geocoding.this.address.isEmpty() && Geocoding.this.componentsMap == null)
                 throw new IllegalArgumentException("Please set address or components for geocoding");
-            if (listener == null)
-                throw new IllegalArgumentException("Please set OnGeocodingListener for geocoding");
             return Geocoding.this;
         }
     }

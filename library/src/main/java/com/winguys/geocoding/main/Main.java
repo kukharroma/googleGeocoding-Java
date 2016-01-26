@@ -19,7 +19,7 @@ public class Main {
         Geocoding geocoding = Geocoding.newBuilder().setAddress("address")
                 .setComponents("qewrty", "123456", "adsfdsfasdf", "123540", Region.GREAT_BRITAIN_UK)
                 .setBounds("34.172684,-118.604794", "34.236144,-118.500938")
-                .setApiKey("56466488949").build();
+                .setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY").build();
 
         geocoding.execute(new OnGeocodingResultListener() {
             @Override
@@ -28,7 +28,7 @@ public class Main {
             }
         });
 
-        ReverseGeocoding.newBuilder().setApiKey("adpaddpadpadd")
+        ReverseGeocoding.newBuilder().setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY")
                 .setLatLng("40.714224,-73.961452")
                 .setLanguage(Language.ENGLISH)
                 .setLocationTypes(ReverseLocationType.RANGE_INTERPOLATED, ReverseLocationType.GEOMETRIC_CENTER)

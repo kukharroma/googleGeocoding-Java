@@ -47,6 +47,8 @@ public class ReverseGeocoding {
     }
 
     public void execute() {
+        if (listener == null)
+            throw new IllegalArgumentException("Please set OnReverseGeocodingListener for reverseGeocoding");
         ReverseGeocodingUseCase geocodingUseCase = new ReverseGeocodingUseCase();
         geocodingUseCase.execute(this, listener);
     }
@@ -96,12 +98,10 @@ public class ReverseGeocoding {
         public ReverseGeocoding build() {
             if (ReverseGeocoding.this.apiKey.isEmpty())
                 throw new IllegalArgumentException("Please set api key for geocoding");
-            if (ReverseGeocoding.this.latLng.isEmpty() || ReverseGeocoding.this.placeId.isEmpty())
+            if (ReverseGeocoding.this.latLng == null & ReverseGeocoding.this.placeId == null)
                 throw new IllegalArgumentException("Please set latLng or place id for reverse geocoding");
-            if (!ReverseGeocoding.this.latLng.isEmpty() & !ReverseGeocoding.this.placeId.isEmpty())
-                throw new IllegalArgumentException("Please set LatLng or place  identifier for reverse geocoding, but not together.");
-            if (listener == null)
-                throw new IllegalArgumentException("Please set OnReverseGeocodingListener for reverseGeocoding");
+            if (ReverseGeocoding.this.latLng != null & ReverseGeocoding.this.placeId != null)
+            throw new IllegalArgumentException("Please set LatLng or place  identifier for reverse geocoding, but not together.");
             return ReverseGeocoding.this;
         }
     }
