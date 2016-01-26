@@ -1,5 +1,8 @@
 package com.winguys.geocoding.api;
 
+
+import com.squareup.okhttp.OkHttpClient;
+
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -12,9 +15,12 @@ public class RestClient {
     private GeocodeService service;
 
     private RestClient() {
+        OkHttpClient httpClient = new OkHttpClient();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(Url.BASE_URL)
+                .client(httpClient)
                 .build();
         service = retrofit.create(GeocodeService.class);
     }

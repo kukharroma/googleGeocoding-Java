@@ -56,7 +56,7 @@ public class Geocoding {
         geocodingUseCase.execute(this, listener);
     }
 
-    public void execute(OnGeocodingResultListener listener){
+    public void execute(OnGeocodingResultListener listener) {
         GeocodingUseCase geocodingUseCase = new GeocodingUseCase();
         geocodingUseCase.execute(this, listener);
     }
@@ -73,17 +73,24 @@ public class Geocoding {
         }
 
         public Builder setAddress(String address) {
+            address = address.replaceAll(" ", "+");
+            System.out.println(address);
             Geocoding.this.address = address;
             return this;
         }
 
         public Builder setComponents(String route, String locality, String administrativeArea, String postalCode, Region country) {
             Geocoding.this.componentsMap = new HashMap<>();
-            Geocoding.this.componentsMap.put(Url.Components.ROUTE, route);
-            Geocoding.this.componentsMap.put(Url.Components.LOCALITY, locality);
-            Geocoding.this.componentsMap.put(Url.Components.ADMINISTRATIVE_AREA, administrativeArea);
-            Geocoding.this.componentsMap.put(Url.Components.POSTAL_CODE, postalCode);
-            Geocoding.this.componentsMap.put(Url.Components.COUNTRY, country.getParam());
+            if (route != null)
+                Geocoding.this.componentsMap.put(Url.Components.ROUTE, route);
+            if (locality != null)
+                Geocoding.this.componentsMap.put(Url.Components.LOCALITY, locality);
+            if (administrativeArea != null)
+                Geocoding.this.componentsMap.put(Url.Components.ADMINISTRATIVE_AREA, administrativeArea);
+            if (postalCode != null)
+                Geocoding.this.componentsMap.put(Url.Components.POSTAL_CODE, postalCode);
+            if (country != null)
+                Geocoding.this.componentsMap.put(Url.Components.COUNTRY, country.getParam());
             return this;
         }
 

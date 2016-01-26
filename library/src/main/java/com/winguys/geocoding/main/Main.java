@@ -3,6 +3,7 @@ package com.winguys.geocoding.main;
 
 import com.winguys.geocoding.api.constant.AddressType;
 import com.winguys.geocoding.api.constant.Language;
+import com.winguys.geocoding.api.constant.Region;
 import com.winguys.geocoding.api.constant.ReverseLocationType;
 import com.winguys.geocoding.geocoding.Geocoding;
 import com.winguys.geocoding.geocoding.OnGeocodingResultListener;
@@ -15,7 +16,10 @@ import com.winguys.geocoding.model.GeocodeResult;
 public class Main {
 
     public static void main(String[] args) {
-        Geocoding geocoding = Geocoding.newBuilder().setAddress("Vinnitsa,St.Kelecka")
+        Geocoding geocoding = Geocoding.newBuilder().setAddress("Moscow, Russia")
+                .setLanguage(Language.ENGLISH)
+                .setRegion(Region.RUSSIA)
+                .setComponents(null,null,null,null,Region.RUSSIA)
                 .setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY").build();
 
         geocoding.execute(new OnGeocodingResultListener() {
@@ -29,8 +33,8 @@ public class Main {
 
         ReverseGeocoding.newBuilder().setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY")
                 .setLatLng("40.714224,-73.961452")
-                .setLanguage(Language.ENGLISH)
-                .setResultTypes(AddressType.COUNTRY)
+                .setLanguage(Language.UKRAINIAN)
+                .setResultTypes(AddressType.COUNTRY,AddressType.NEIGHBORHOOD)
                 .build().execute(new OnGeocodingResultListener() {
             @Override
             public void onGeocodingResultListener(GeocodeResult geocodeResult) {
