@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.tv_reverse_geocoding_result)
     TextView tvReverseGeocodingResult;
 
-    private String latitude = "40,744061";
-    private String longtitude = "-73,995561";
+    private String latitude = "40.744061";
+    private String longitude = "-73.995561";
     private String address = "247 W 24th St,New York, NY 10011,USA";
     private String API_KEY = "AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY";
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         etLatitude.setText(latitude);
-        etLongitude.setText(longtitude);
+        etLongitude.setText(longitude);
         etAddress.setText(address);
     }
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     if (geocodeResult.getStatus().equals(RequestMessage.OK)) {
                         Result result = geocodeResult.getResults().get(0);
                         tvGeocodingResult.setText(result.getGeometry().getLocation().getLat()
-                                +", "+result.getGeometry().getLocation().getLng());
+                                + ", " + result.getGeometry().getLocation().getLng());
                     }
                 }
             });
@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn_reverse_geocoding)
     public void onReverseGeocodingClick() {
         if (!etLatitude.getText().toString().isEmpty() & !etLongitude.getText().toString().isEmpty()) {
-            String latitude = etLatitude.getText().toString().replaceAll(",", ".");
-            String longitude = etLongitude.getText().toString().replaceAll(",", ".");
+
             Log.i("Latitude ", latitude);
             ReverseGeocoding.newBuilder().setApiKey(API_KEY)
                     .setLatLng(latitude + ", " + longitude)
@@ -79,14 +78,13 @@ public class MainActivity extends AppCompatActivity {
                     .execute(new OnGeocodingResultListener() {
                         @Override
                         public void onGeocodingResultListener(GeocodeResult geocodeResult) {
-                            Log.i("Status ",geocodeResult.getStatus());
+                            Log.i("Status ", geocodeResult.getStatus());
                             if (geocodeResult.getStatus().equals(RequestMessage.OK)) {
                                 Result result = geocodeResult.getResults().get(0);
                                 tvReverseGeocodingResult.setText(result.getFormattedAddress());
                             }
                         }
                     });
-
 
 
         }
