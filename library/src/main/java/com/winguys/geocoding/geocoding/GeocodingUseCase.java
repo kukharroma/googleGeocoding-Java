@@ -1,6 +1,7 @@
 package com.winguys.geocoding.geocoding;
 
 import com.winguys.geocoding.api.RestClient;
+import com.winguys.geocoding.api.constant.RequestMessage;
 import com.winguys.geocoding.api.mapBuilder.GeocodingMapBuilder;
 import com.winguys.geocoding.model.GeocodeResult;
 
@@ -19,12 +20,15 @@ public class GeocodingUseCase {
             @Override
             public void onResponse(Response<GeocodeResult> response, Retrofit retrofit) {
                 if (listener != null)
-                    listener.onGeocodingResultListener(response.body());
+                    if (response.body().getStatus().equals(RequestMessage.OK))
+                        listener.onSuccess(response.body());
+                    else
+                        listener.onFailed(response.body().getStatus());
             }
 
             @Override
             public void onFailure(Throwable t) {
-                System.out.println(t.getMessage());
+                listener.onFailed(t.getMessage());
             }
         });
     }

@@ -30,7 +30,7 @@ public class Main {
                 .setComponents(null, null, null, null, Region.RUSSIA)
                 .build().execute(new OnGeocodingResultListener() {
             @Override
-            public void onGeocodingResultListener(GeocodeResult geocodeResult) {
+            public void onSuccess(GeocodeResult geocodeResult) {
                 System.out.println("Status :" + geocodeResult.getStatus());
                 System.out.println("Result(address) :" + geocodeResult.getResults().get(0).getFormattedAddress());
                 System.out.println("Result(latLng) :" + geocodeResult.getResults().get(0).getGeometry().getLocation().getLat() + ", " + geocodeResult.getResults().get(0).getGeometry().getLocation().getLng());
@@ -43,7 +43,7 @@ public class Main {
                 .setResultTypes(AddressType.COUNTRY, AddressType.NEIGHBORHOOD)
                 .build().execute(new OnGeocodingResultListener() {
             @Override
-            public void onGeocodingResultListener(GeocodeResult geocodeResult) {
+            public void onSuccess(GeocodeResult geocodeResult) {
                 System.out.println("Status reverse:" + geocodeResult.getStatus());
                 System.out.println("Result(address) :" + geocodeResult.getResults().get(0).getFormattedAddress());
                 System.out.println("Result(latLng) :" + geocodeResult.getResults().get(0).getGeometry().getLocation().getLat() + ", " + geocodeResult.getResults().get(0).getGeometry().getLocation().getLng());

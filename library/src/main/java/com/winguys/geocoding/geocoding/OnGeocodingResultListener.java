@@ -7,5 +7,7 @@ import com.winguys.geocoding.model.GeocodeResult;
  */
 public interface OnGeocodingResultListener {
 
-    void onGeocodingResultListener(GeocodeResult geocodeResult);
+    void onSuccess(GeocodeResult geocodeResult);
+
+    void onFailed(String message);
 }

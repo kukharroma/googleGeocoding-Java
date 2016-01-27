@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.winguys.geocoding.api.constant.Language;
 import com.winguys.geocoding.api.constant.Region;
@@ -58,13 +59,18 @@ public class MainActivity extends AppCompatActivity {
                     .setAddress(etAddress.getText().toString())
                     .build().execute(new OnGeocodingResultListener() {
                 @Override
-                public void onGeocodingResultListener(GeocodeResult geocodeResult) {
+                public void onSuccess(GeocodeResult geocodeResult) {
                     Log.i(TAG, "Geocoding status ---> " + geocodeResult.getStatus());
                     if (geocodeResult.getStatus().equals(RequestMessage.OK)) {
                         Result result = geocodeResult.getResults().get(0);
                         tvGeocodingResult.setText(result.getGeometry().getLocation().getLat()
                                 + ", " + result.getGeometry().getLocation().getLng());
                     }
+                }
+
+                @Override
+                public void onFailed(String message) {
+                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -80,16 +86,19 @@ public class MainActivity extends AppCompatActivity {
                     .build()
                     .execute(new OnGeocodingResultListener() {
                         @Override
-                        public void onGeocodingResultListener(GeocodeResult geocodeResult) {
+                        public void onSuccess(GeocodeResult geocodeResult) {
                             Log.i(TAG, "Reverse Geocoding status ---> " + geocodeResult.getStatus());
                             if (geocodeResult.getStatus().equals(RequestMessage.OK)) {
                                 Result result = geocodeResult.getResults().get(0);
                                 tvReverseGeocodingResult.setText(result.getFormattedAddress());
                             }
                         }
+
+                        @Override
+                        public void onFailed(String message) {
+                            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                        }
                     });
-
-
         }
     }
 }
