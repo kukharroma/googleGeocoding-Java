@@ -4,7 +4,6 @@ package com.winguys.geocoding.main;
 import com.winguys.geocoding.api.constant.AddressType;
 import com.winguys.geocoding.api.constant.Language;
 import com.winguys.geocoding.api.constant.Region;
-import com.winguys.geocoding.api.constant.ReverseLocationType;
 import com.winguys.geocoding.geocoding.Geocoding;
 import com.winguys.geocoding.geocoding.OnGeocodingResultListener;
 import com.winguys.geocoding.geocoding.ReverseGeocoding;
@@ -15,14 +14,20 @@ import com.winguys.geocoding.model.GeocodeResult;
  */
 public class Main {
 
+    // geocoding
+    private static String API_KEY = "AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY";
+    private static String ADDRESS = "Moscow, Russia";
+
+    // reverse geocoding
+    private static String LAT_LNG = "40.744061, -73.995561";
+
     public static void main(String[] args) {
-        Geocoding geocoding = Geocoding.newBuilder().setAddress("Moscow, Russia")
+        Geocoding.newBuilder().setApiKey(API_KEY)
+                .setAddress(ADDRESS)
                 .setLanguage(Language.ENGLISH)
                 .setRegion(Region.RUSSIA)
-                .setComponents(null,null,null,null,Region.RUSSIA)
-                .setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY").build();
-
-        geocoding.execute(new OnGeocodingResultListener() {
+                .setComponents(null, null, null, null, Region.RUSSIA)
+                .build().execute(new OnGeocodingResultListener() {
             @Override
             public void onGeocodingResultListener(GeocodeResult geocodeResult) {
                 System.out.println("Status :" + geocodeResult.getStatus());
@@ -31,10 +36,10 @@ public class Main {
             }
         });
 
-        ReverseGeocoding.newBuilder().setApiKey("AIzaSyBpprOpfgA6NOy5VYcIEGzA-g2oslXIcRY")
-                .setLatLng("40.744061, -73.995561")
+        ReverseGeocoding.newBuilder().setApiKey(API_KEY)
+                .setLatLng(LAT_LNG)
                 .setLanguage(Language.UKRAINIAN)
-                .setResultTypes(AddressType.COUNTRY,AddressType.NEIGHBORHOOD)
+                .setResultTypes(AddressType.COUNTRY, AddressType.NEIGHBORHOOD)
                 .build().execute(new OnGeocodingResultListener() {
             @Override
             public void onGeocodingResultListener(GeocodeResult geocodeResult) {
