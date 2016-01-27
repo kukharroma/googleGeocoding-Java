@@ -35,6 +35,11 @@ public class Main {
                 System.out.println("Result(address) :" + geocodeResult.getResults().get(0).getFormattedAddress());
                 System.out.println("Result(latLng) :" + geocodeResult.getResults().get(0).getGeometry().getLocation().getLat() + ", " + geocodeResult.getResults().get(0).getGeometry().getLocation().getLng());
             }
+
+            @Override
+            public void onFailed(String message) {
+                System.out.println("Error message:" + message);
+            }
         });
 
         ReverseGeocoding.newBuilder().setApiKey(API_KEY)
@@ -47,6 +52,11 @@ public class Main {
                 System.out.println("Status reverse:" + geocodeResult.getStatus());
                 System.out.println("Result(address) :" + geocodeResult.getResults().get(0).getFormattedAddress());
                 System.out.println("Result(latLng) :" + geocodeResult.getResults().get(0).getGeometry().getLocation().getLat() + ", " + geocodeResult.getResults().get(0).getGeometry().getLocation().getLng());
+            }
+
+            @Override
+            public void onFailed(String message) {
+                System.out.println("Error message:" + message);
             }
         });
 
