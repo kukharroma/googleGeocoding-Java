@@ -1,7 +1,7 @@
 package com.winguys.geocoding.geocoding;
 
 import com.winguys.geocoding.api.RestClient;
-import com.winguys.geocoding.api.ReverseUrlBuilder;
+import com.winguys.geocoding.api.mapBuilder.ReverseGeocodingMapBuilder;
 import com.winguys.geocoding.model.GeocodeResult;
 
 import retrofit.Callback;
@@ -14,7 +14,7 @@ import retrofit.Retrofit;
 public class ReverseGeocodingUseCase {
 
     public void execute(ReverseGeocoding reverseGeocoding, final OnGeocodingResultListener listener) {
-        ReverseUrlBuilder urlBuilder = new ReverseUrlBuilder(reverseGeocoding);
+        ReverseGeocodingMapBuilder urlBuilder = new ReverseGeocodingMapBuilder(reverseGeocoding);
         RestClient.getInstance().getGeocodeService().makeReverseGeocoding(urlBuilder.buildUrl()).enqueue(new Callback<GeocodeResult>() {
             @Override
             public void onResponse(Response<GeocodeResult> response, Retrofit retrofit) {

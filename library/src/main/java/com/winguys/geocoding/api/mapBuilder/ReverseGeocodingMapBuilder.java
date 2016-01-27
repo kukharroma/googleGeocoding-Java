@@ -1,5 +1,6 @@
-package com.winguys.geocoding.api;
+package com.winguys.geocoding.api.mapBuilder;
 
+import com.winguys.geocoding.api.Url;
 import com.winguys.geocoding.geocoding.ReverseGeocoding;
 
 import java.util.HashMap;
@@ -8,14 +9,15 @@ import java.util.Map;
 /**
  * Created by Stafiiyevskyi on 25.01.2016.
  */
-public class ReverseUrlBuilder {
-    private ReverseGeocoding reverseGeocoding;
-    private Map<String, String> map;
+public class ReverseGeocodingMapBuilder extends QueryMapBuilder{
 
-    public ReverseUrlBuilder(ReverseGeocoding geocoding) {
+    private ReverseGeocoding reverseGeocoding;
+
+    public ReverseGeocodingMapBuilder(ReverseGeocoding geocoding) {
         this.reverseGeocoding = geocoding;
     }
 
+    @Override
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
         if (reverseGeocoding.getLatLng() != null) {

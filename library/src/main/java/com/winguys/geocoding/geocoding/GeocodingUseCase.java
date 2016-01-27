@@ -1,7 +1,7 @@
 package com.winguys.geocoding.geocoding;
 
 import com.winguys.geocoding.api.RestClient;
-import com.winguys.geocoding.api.UrlBuilder;
+import com.winguys.geocoding.api.mapBuilder.GeocodingMapBuilder;
 import com.winguys.geocoding.model.GeocodeResult;
 
 import retrofit.Callback;
@@ -14,8 +14,8 @@ import retrofit.Retrofit;
 public class GeocodingUseCase {
 
     public void execute(Geocoding geocoding, final OnGeocodingResultListener listener) {
-        UrlBuilder urlBuilder = new UrlBuilder(geocoding);
-        RestClient.getInstance().getGeocodeService().makeGeocoding(urlBuilder.buildUrl()).enqueue(new Callback<GeocodeResult>() {
+        GeocodingMapBuilder geocodingMapBuilder = new GeocodingMapBuilder(geocoding);
+        RestClient.getInstance().getGeocodeService().makeGeocoding(geocodingMapBuilder.buildUrl()).enqueue(new Callback<GeocodeResult>() {
             @Override
             public void onResponse(Response<GeocodeResult> response, Retrofit retrofit) {
                 if (listener != null)

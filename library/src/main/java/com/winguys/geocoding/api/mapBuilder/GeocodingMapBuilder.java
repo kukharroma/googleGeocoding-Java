@@ -1,5 +1,6 @@
-package com.winguys.geocoding.api;
+package com.winguys.geocoding.api.mapBuilder;
 
+import com.winguys.geocoding.api.Url;
 import com.winguys.geocoding.geocoding.Geocoding;
 
 import java.util.HashMap;
@@ -9,15 +10,15 @@ import java.util.Map;
 /**
  * Created by roma on 22.01.16.
  */
-public class UrlBuilder {
+public class GeocodingMapBuilder extends QueryMapBuilder{
 
     private Geocoding geocoding;
-    private Map<String, String> map;
 
-    public UrlBuilder(Geocoding geocoding) {
+    public GeocodingMapBuilder(Geocoding geocoding) {
         this.geocoding = geocoding;
     }
 
+    @Override
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
         if (geocoding.getAddress() != null) {
