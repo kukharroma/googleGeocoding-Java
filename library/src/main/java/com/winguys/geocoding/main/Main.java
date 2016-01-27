@@ -19,7 +19,8 @@ public class Main {
     private static String ADDRESS = "Moscow, Russia";
 
     // reverse geocoding
-    private static String LAT_LNG = "40.744061, -73.995561";
+    private static String LATITUDE = "40.744061";
+    private static String LONGITUDE = "-73.995561";
 
     public static void main(String[] args) {
         Geocoding.newBuilder().setApiKey(API_KEY)
@@ -37,7 +38,7 @@ public class Main {
         });
 
         ReverseGeocoding.newBuilder().setApiKey(API_KEY)
-                .setLatLng(LAT_LNG)
+                .setLatLng(LATITUDE, LONGITUDE)
                 .setLanguage(Language.UKRAINIAN)
                 .setResultTypes(AddressType.COUNTRY, AddressType.NEIGHBORHOOD)
                 .build().execute(new OnGeocodingResultListener() {

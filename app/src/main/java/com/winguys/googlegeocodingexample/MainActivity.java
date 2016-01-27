@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.tv_reverse_geocoding_result)
     TextView tvReverseGeocodingResult;
 
+    private static String TAG = MainActivity.class.getSimpleName();
+
     private String latitude = "40.744061";
     private String longitude = "-73.995561";
     private String address = "247 W 24th St,New York, NY 10011,USA";
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     .build().execute(new OnGeocodingResultListener() {
                 @Override
                 public void onGeocodingResultListener(GeocodeResult geocodeResult) {
+                    Log.i(TAG, "Geocoding status ---> " + geocodeResult.getStatus());
                     if (geocodeResult.getStatus().equals(RequestMessage.OK)) {
                         Result result = geocodeResult.getResults().get(0);
                         tvGeocodingResult.setText(result.getGeometry().getLocation().getLat()
@@ -73,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
             Log.i("Latitude ", latitude);
             ReverseGeocoding.newBuilder().setApiKey(API_KEY)
-                    .setLatLng(latitude + ", " + longitude)
+                    .setLatLng(latitude, longitude)
                     .build()
                     .execute(new OnGeocodingResultListener() {
                         @Override
                         public void onGeocodingResultListener(GeocodeResult geocodeResult) {
-                            Log.i("Status ", geocodeResult.getStatus());
+                            Log.i(TAG, "Reverse Geocoding status ---> " + geocodeResult.getStatus());
                             if (geocodeResult.getStatus().equals(RequestMessage.OK)) {
                                 Result result = geocodeResult.getResults().get(0);
                                 tvReverseGeocodingResult.setText(result.getFormattedAddress());

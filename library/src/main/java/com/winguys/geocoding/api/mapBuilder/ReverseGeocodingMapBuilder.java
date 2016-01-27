@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Stafiiyevskyi on 25.01.2016.
  */
-public class ReverseGeocodingMapBuilder extends QueryMapBuilder{
+public class ReverseGeocodingMapBuilder extends QueryMapBuilder {
 
     private ReverseGeocoding reverseGeocoding;
 
@@ -20,8 +20,8 @@ public class ReverseGeocodingMapBuilder extends QueryMapBuilder{
     @Override
     public Map<String, String> buildUrl() {
         map = new HashMap<>();
-        if (reverseGeocoding.getLatLng() != null) {
-            map.put(Url.ReverseGeocoding.LAT_LNG, reverseGeocoding.getLatLng());
+        if (reverseGeocoding.getLatitude() != null & reverseGeocoding.getLongitude() != null) {
+            map.put(Url.ReverseGeocoding.LAT_LNG, reverseGeocoding.getLatitude() + ", " + reverseGeocoding.getLongitude());
         } else {
             map.put(Url.ReverseGeocoding.PLACE_ID, reverseGeocoding.getPlaceId());
         }

@@ -9,7 +9,8 @@ import com.winguys.geocoding.api.constant.ReverseLocationType;
  */
 public class ReverseGeocoding {
 
-    private String latLng;
+    private String latitude;
+    private String longitude;
     private String placeId;
     private ReverseLocationType[] locationTypes;
     private AddressType[] resultTypes;
@@ -18,8 +19,12 @@ public class ReverseGeocoding {
 
     private OnGeocodingResultListener listener;
 
-    public String getLatLng() {
-        return latLng;
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
     }
 
     public ReverseLocationType[] getLocationTypes() {
@@ -69,8 +74,13 @@ public class ReverseGeocoding {
             return this;
         }
 
-        public Builder setLatLng(String latLng) {
-            ReverseGeocoding.this.latLng = latLng;
+        public Builder setLatLng(String latitude, String longitude) {
+            if (latitude == null)
+                throw new IllegalArgumentException("Latitude cannot be null");
+            ReverseGeocoding.this.latitude = latitude;
+            if (longitude == null)
+                throw new IllegalArgumentException("Longitude cannot be null");
+            ReverseGeocoding.this.longitude = longitude;
             return this;
         }
 
@@ -98,10 +108,10 @@ public class ReverseGeocoding {
         public ReverseGeocoding build() {
             if (ReverseGeocoding.this.apiKey.isEmpty())
                 throw new IllegalArgumentException("Please set api key for geocoding");
-            if (ReverseGeocoding.this.latLng == null & ReverseGeocoding.this.placeId == null)
+            if (ReverseGeocoding.this.latitude == null & ReverseGeocoding.this.longitude == null & ReverseGeocoding.this.placeId == null)
                 throw new IllegalArgumentException("Please set latLng or place id for reverse geocoding");
-            if (ReverseGeocoding.this.latLng != null & ReverseGeocoding.this.placeId != null)
-            throw new IllegalArgumentException("Please set LatLng or place  identifier for reverse geocoding, but not together.");
+            if (ReverseGeocoding.this.latitude != null & ReverseGeocoding.this.longitude != null & ReverseGeocoding.this.placeId != null)
+                throw new IllegalArgumentException("Please set LatLng or place  identifier for reverse geocoding, but not together.");
             return ReverseGeocoding.this;
         }
     }
